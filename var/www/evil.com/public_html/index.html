@@ -1,0 +1,28 @@
+<html>
+  <head>
+	<title>Evil | Home</title>
+    <script>
+		var home = "http://evil.com/"
+		function toImage(){
+			window.location = home + 'image.html'
+		}
+		function toXSS(){
+			window.location = home + 'xss.html'
+		}
+		function toXDomain(){
+			window.location = home + 'xdomain.html'
+		}
+		function toCPoising(){
+			window.location = home + 'cpoising.html'
+		}
+    </script> 
+  </head>
+  <body>
+	  <h1>Evil site!</h1>
+	  <p>Choose script page:</p>
+	  <button onclick="toImage()">Images</button>
+	  <button onclick="toXSS()">XSS</button>
+	  <button onclick="toXDomain()">XDomain</button>
+	  <button onclick="toCPoising()">Cache Poising</button>
+	</body>
+</html>

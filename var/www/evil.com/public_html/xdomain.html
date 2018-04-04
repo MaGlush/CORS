@@ -1,0 +1,36 @@
+<html>
+  <head>
+	<title>Evil | XDomain </title>
+    <script>
+		function doXML() {
+            var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+            var xhr = new XHR();
+            var URL = document.getElementById('site_url').value
+            xhr.open('GET', URL, true);
+            // xhr.setRequestHeader("X-User-id", "<script>alert(1)</scr"+"ipt>");
+            xhr.onload = function() {
+                alert( this.responseText );
+                JSON.stringify(this.responseText);
+                parsed = JSON.parse(this.responseText);
+                var arr = [];
+                for(var x in parsed){
+                    arr.push(parsed[x]);
+                }
+                console.log(arr)
+                document.getElementById('json').innerHTML = arr[0];
+            }
+            xhr.onerror = function() {
+                alert( 'Couldn\'t fectch ' + URL + '\nError status: ' + this.status);
+            }
+            xhr.send();
+		}
+    </script> 
+  </head>
+  <body>
+      <h1>Cross Domain request</h1>
+      <text>input domain to xrequest:</text>
+	  <input type="text" name="name" id="site_url" value="http://good.com/" />
+			<button onclick="doXML()">Do cross-domain request</button>
+			<text id="json">JSON here</text>
+	</body>
+</html>
